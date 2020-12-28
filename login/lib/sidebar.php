@@ -17,7 +17,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="dashboard">Dasboard</a>
                                         </li>
-                                        <li class="nav-item">
+
+                                        <?php if ($_SESSION['tingkat'] == 'MQ==') {
+                                            echo '<li class="nav-item">
                                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">Data User</a>
                                             <div id="submenu-1-2" class="collapse submenu" style="">
                                                 <ul class="nav flex-column">
@@ -61,7 +63,8 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="logout">Logout</a>
-                                        </li>
+                                        </li>';
+                                        } ?>
                                     </ul>
                                 </div>
                             </li>
