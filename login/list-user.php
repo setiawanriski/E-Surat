@@ -1,6 +1,44 @@
 <?php 
 include '../act/secure-page.php';
 include '../conf/config.php';
+if (isset($_GET['id'])) {
+    $id_edit = base64_decode($_GET['id']);
+    $query = mysqli_query($conn, "SELECT * FROM `user_login` WHERE id_user='$id_edit'"); 
+    $data = mysqli_fetch_assoc($query);
+    // print_r($data);
+    if (isset($_POST['username'])) {
+        $username = $_POST['username'];
+        $password = md5($_POST['password']);
+        $tingkat = $_POST['tingkat'];
+        if (isset($_POST['password'])) {
+            $edit = mysqli_query($conn, "UPDATE `user_login` SET `username`='$username',`password`='$password',`tingkat`='$tingkat' WHERE id_user='$id_edit'"); 
+            if ($edit) {
+                echo '  <script type="text/javascript">
+                             alert("Edit User Berhasil");
+                        </script>
+                        <meta http-equiv="refresh" content="1; url='.$base_url.'/login/list-user">';
+            } else {
+                 echo '  <script type="text/javascript">
+                             alert("Edit User Gagal");
+                        </script>
+                        <meta http-equiv="refresh" content="1; url='.$base_url.'/login/list-user">';
+            }
+        } else {
+            $edit = mysqli_query($conn, "UPDATE `user_login` SET `username`='$username',`tingkat`='$tingkat' WHERE id_user='$id_edit'"); 
+            if ($edit) {
+                echo '  <script type="text/javascript">
+                             alert("Edit User Berhasil");
+                        </script>
+                        <meta http-equiv="refresh" content="1; url='.$base_url.'/login/list-user">';
+            } else {
+                 echo '  <script type="text/javascript">
+                             alert("Edit User Gagal");
+                        </script>
+                        <meta http-equiv="refresh" content="1; url='.$base_url.'/login/list-user">';
+            }
+        }
+    }
+}
  ?>
 <!doctype html>
 <html lang="en">
@@ -27,6 +65,7 @@ include '../conf/config.php';
     <!-- ============================================================== -->
     <div class="dashboard-main-wrapper">
          <?php include 'lib/navbar.php'; ?>
+
          <?php include 'lib/sidebar.php'; ?>
         <!-- ============================================================== -->
         <!-- wrapper  -->
@@ -36,11 +75,71 @@ include '../conf/config.php';
                 <!-- ============================================================== -->
                 <!-- pageheader -->
                 <!-- ============================================================== -->
+                <!-- Modal content-->
+                <?php if (isset($_GET['id'])) {
+                    if ($data['tingkat'] == 1) {
+                        $tingkat = '<option disabled="">-- Pilih Role --</option>
+                                    <option selected="" value="1">Admin</option>
+                                    <option value="2">User</option>';
+                    } else {
+                        $tingkat = '<option disabled="">-- Pilih Role --</option>
+                                    <option value="1">Admin</option>
+                                    <option selected="" value="2">User</option>';
+                    }
+                    echo '<div class="modal-content">
+                  <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <h4 class="modal-title">Edit User</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form action="list-user?id='.$_GET['id'].'" method="POST">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <label for="validationCustomUsername">Tingkat</label>
+                            <div class="input-group">
+                                <select name="tingkat" class="form-control">
+                                 '.$tingkat.'   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <label for="validationCustomUsername">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                </div>
+                                <input type="text" name="username" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="" value="'.$data['username'].'">
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <label for="validationCustomUsername">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                </div>
+                                <input type="password" name="password" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend" required="">
+                                <div class="invalid-feedback">
+                                    Please choose a password.
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+                    </form>
+                </div>
+                </div>';
+                } ?>
+                
+                <br>
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
                             <h2 class="pageheader-title">List User</h2>
-                            <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                            <p class="pageheader-text"></p>
                             <div class="page-breadcrumb">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -75,21 +174,28 @@ include '../conf/config.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            
                                                 <?php 
-                                                    $sql = mysqli_query($conn,"SELECT * FROM `user_login` WHERE tingkat='1'");
+                                                    $sql = mysqli_query($conn,"SELECT * FROM `user_login` ");
                                                    while ($isi = mysqli_fetch_array($sql)) {
                                                         $no = 1;
                                                         $id = base64_encode($isi['id_user']);
-                                                        echo '  <td>'.$no.'</td>
-                                                                <td>'.$isi['username'].'</td>
-                                                                <td>Admin</td>
-                                                                <td><a href="edit-user?id='.$id.'" style="color:red">Edit</a> | <a href="delete-user?id='.$id.'" style="color:blue">Delete</a></td>';
+                                                        if ($isi['tingkat'] == '1') {
+                                                            $tingkat = 'Admin';
+                                                        } else {
+                                                            $tingkat = 'User';
+                                                        }
+                                                        echo '  <tr>
+                                                                    <td>'.$no.'</td>
+                                                                    <td>'.$isi['username'].'</td>
+                                                                    <td>'.$tingkat.'</td>
+                                                                    <td><a href="list-user?id='.$id.'" style="color:red">Edit</a> | <a href="delete-user?id='.$id.'" style="color:blue">Delete</a></td>
+                                                                </tr>';
                                                         $no++;
                                                     } 
                                                  ?>
                                                
-                                            </tr>
+                                            
                                         </tbody>
                                         <tfoot>
                                             <tr>

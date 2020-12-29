@@ -27,7 +27,7 @@
                                                         <a class="nav-link" href="list-user">List user</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="tambah-user">Tambah user</a>
+                                                        <a class="nav-link" data-toggle="modal" data-target="#myModal" href="#">Tambah user</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -74,3 +74,58 @@
                 </nav>
             </div>
         </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"> Close</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="../act/act-add-user" method="POST">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <label for="validationCustomUsername">Tingkat</label>
+                            <div class="input-group">
+                                <select name="tingkat" class="form-control">
+                                    <option selected="" disabled="">-- Pilih Role --</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">User</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <label for="validationCustomUsername">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                </div>
+                                <input type="text" name="username" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <label for="validationCustomUsername">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                </div>
+                                <input type="password" name="password" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend" required="">
+                                <div class="invalid-feedback">
+                                    Please choose a password.
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+              </div>
+              
+            </div>
+          </div>
