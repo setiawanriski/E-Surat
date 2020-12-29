@@ -1,5 +1,10 @@
 <?php 
 include '../act/secure-page.php';
+include '../conf/config.php';
+$sql_admin = mysqli_query($conn, "SELECT * FROM `user_login` WHERE tingkat='1'");
+$sql_user = mysqli_query($conn, "SELECT * FROM `user_login` WHERE tingkat='2'");
+$data_admin = mysqli_num_rows($sql_admin);
+$data_user = mysqli_num_rows($sql_user);
 // print_r($_SESSION);
  ?>
  <!doctype html>
@@ -87,7 +92,7 @@ include '../act/secure-page.php';
                                     <div class="card-body">
                                         <h5 class="text-muted">Total User</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">2</h1>
+                                            <h1 class="mb-1"><?php echo $data_user; ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-primary font-weight-bold">
                                             <span>Orang</span>
@@ -101,7 +106,7 @@ include '../act/secure-page.php';
                                     <div class="card-body">
                                         <h5 class="text-muted">Total Admin</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">3</h1>
+                                            <h1 class="mb-1"><?php echo $data_admin; ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-secondary font-weight-bold">
                                             <span>Orang</span>
