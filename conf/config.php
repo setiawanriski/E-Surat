@@ -12,5 +12,5 @@ if (mysqli_connect_errno()) {
 }
 
 // setting base url
-$base_url = 'http://127.0.0.1/mr-day/E-surat/';
+$base_url = 'http://mr-day.test/e-surat';
 ?>

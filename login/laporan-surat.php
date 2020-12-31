@@ -105,10 +105,6 @@ include '../conf/config.php';
                                                           <div  class="modal-body">
                                                             <iframe style="height: 500px" src='../act/file/<?php echo $data["file_surat"];?>' width="100%"></iframe>
                                                           </div>
-                                                          <div class="modal-footer">
-                                                            <!-- <a href="act-valid-user?id=<?php  echo base64_encode($data['id_pembayaran']) ?>">
-                                                                <button type="button" class="btn btn-success" >Validasi</button>
-                                                             </a> -->
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                           </div>
                                                         </div>
