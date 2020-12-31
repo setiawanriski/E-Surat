@@ -77,14 +77,24 @@ if (isset($_GET['id'])) {
                 <!-- ============================================================== -->
                 <!-- Modal content-->
                 <?php if (isset($_GET['id'])) {
-                    if ($data['tingkat'] == 1) {
-                        $tingkat = '<option disabled="">-- Pilih Role --</option>
-                                    <option selected="" value="1">Admin</option>
-                                    <option value="2">User</option>';
+                    if ($_SESSION['tingkat'] == 'MQ==') {
+                        if ($data['tingkat'] == 1) {
+                            $tingkat = '<option disabled="">-- Pilih Role --</option>
+                                        <option selected="" value="1">Admin</option>
+                                        <option value="2">User</option>';
+                        } else {
+                            $tingkat = '<option disabled="">-- Pilih Role --</option>
+                                        <option value="1">Admin</option>
+                                        <option selected="" value="2">User</option>';
+                        }
                     } else {
-                        $tingkat = '<option disabled="">-- Pilih Role --</option>
-                                    <option value="1">Admin</option>
-                                    <option selected="" value="2">User</option>';
+                        if ($data['tingkat'] == 1) {
+                            $tingkat = '<option disabled="">-- Pilih Role --</option>
+                                        <option value="2" selected=">User</option>';
+                        } else {
+                            $tingkat = '<option disabled="">-- Pilih Role --</option>
+                                        <option selected="" value="2">User</option>';
+                        }
                     }
                     echo '<div class="modal-content">
                   <div class="modal-header">
@@ -176,7 +186,11 @@ if (isset($_GET['id'])) {
                                         <tbody>
                                             
                                                 <?php 
-                                                    $sql = mysqli_query($conn,"SELECT * FROM `user_login` ");
+                                                    if ($_SESSION['tingkat'] == 'MQ==') {
+                                                        $sql = mysqli_query($conn,"SELECT * FROM `user_login` ");
+                                                    }else {
+                                                        $sql = mysqli_query($conn,"SELECT * FROM `user_login` WHERE tingkat='2' ");   
+                                                    }
                                                    while ($isi = mysqli_fetch_array($sql)) {
                                                         $no = 1;
                                                         $id = base64_encode($isi['id_user']);

@@ -3,8 +3,12 @@ include '../act/secure-page.php';
 include '../conf/config.php';
 $sql_admin = mysqli_query($conn, "SELECT * FROM `user_login` WHERE tingkat='1'");
 $sql_user = mysqli_query($conn, "SELECT * FROM `user_login` WHERE tingkat='2'");
+$sql_surat_masuk = mysqli_query($conn, "SELECT * FROM `data_surat` WHERE jenis_surat='masuk'");
+$sql_surat_keluar = mysqli_query($conn, "SELECT * FROM `data_surat` WHERE jenis_surat='keluar'");
 $data_admin = mysqli_num_rows($sql_admin);
 $data_user = mysqli_num_rows($sql_user);
+$data_surat_masuk = mysqli_num_rows($sql_surat_masuk);
+$data_surat_keluar = mysqli_num_rows($sql_surat_keluar);
 // print_r($_SESSION);
  ?>
  <!doctype html>
@@ -64,7 +68,7 @@ $data_user = mysqli_num_rows($sql_user);
                                     <div class="card-body">
                                         <h5 class="text-muted">Surat Masuk</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">200</h1>
+                                            <h1 class="mb-1"><?php echo $data_surat_masuk; ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                             <span></span><span>surat</span>
@@ -78,7 +82,7 @@ $data_user = mysqli_num_rows($sql_user);
                                     <div class="card-body">
                                         <h5 class="text-muted">Surat Keluar</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">300</h1>
+                                            <h1 class="mb-1"><?php echo $data_surat_keluar; ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                             <span></span><span>surat</span>

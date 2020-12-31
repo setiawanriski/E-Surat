@@ -13,7 +13,7 @@
                                     <h5 class="mb-0 text-white nav-user-name"><?php echo base64_decode($_SESSION['username']); ?></h5>
                                     <span class="status"></span><span class="ml-2">Available</span>
                                 </div>
-                                <a class="dropdown-item" href="profile"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profile"><i class="fas fa-user mr-2"></i>Account</a>
                                 <!-- <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a> -->
                                 <a class="dropdown-item" href="logout"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
@@ -22,3 +22,45 @@
                 </div>
             </nav>
         </div>
+         <div class="modal fade" id="profile" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Ubah Kata Sandi</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title"> close</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="../act/act-update-sandi" method="POST" enctype="multipart/form-data"> 
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <!-- <label for="validationCustomUsername">Username</label> -->
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span style="width: 150px" class="input-group-text" id="inputGroupPrepend">Kata Sandi</span>
+                                </div>
+                                <input type="password" name="kata_sandi1" class="form-control" id="validationCustomUsername" placeholder="Kata Sandi" aria-describedby="inputGroupPrepend" required="">
+                            </div>
+                        </div>
+                        <br>    
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                            <!-- <label for="validationCustomUsername">Password</label> -->
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span style="width: 150px" class="input-group-text" id="inputGroupPrepend">Konfirmasi Kata Sandi</span>
+                                </div>
+                                <input type="password" name="kata_sandi2" class="form-control" id="validationCustomUsername" placeholder="Konfirmasi Kata Sandi" aria-describedby="inputGroupPrepend" required="">
+                            </div>
+                        </div>  
+                        <div class="modal-footer">
+                          <button type="submit" name="upload" class="btn btn-primary">Simpan</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                            </form>
+                      
+                    </div>
+                  </div>
+                  
+                </div>
