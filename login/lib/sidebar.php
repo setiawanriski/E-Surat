@@ -46,7 +46,17 @@
                                             </div>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="laporan-surat" >Laporan Surat</a>
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6-7" aria-controls="submenu-1-2">Laporan Surat</a>
+                                            <div id="submenu-6-7" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="laporan-surat?page=laporan-surat-masuk">Laporan surat masuk</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" href="laporan-surat?page=laporan-surat-keluar">Laporan surat keluar</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="logout">Logout</a>
